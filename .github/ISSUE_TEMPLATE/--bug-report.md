@@ -8,7 +8,7 @@ about: Create a report to improve Akka
 
 If you have a [Lightbend Subscription](https://www.lightbend.com/lightbend-platform-subscription), please reach out via the [Lightbend Portal](https://portal.lightbend.com/).
 
-This is an issue tracker used to manage and track the development of **Alpakka**.
+This is an issue tracker used to manage and track the development of this particular module.
 
 Please report issues regarding other projects in their respective issue trackers, e.g.:
  - Akka:          https://github.com/akka/akka/issues 
@@ -16,7 +16,7 @@ Please report issues regarding other projects in their respective issue trackers
  - Alpakka:       https://github.com/akka/alpakka/issues 
  - Alpakka Kafka: https://github.com/akka/alpakka-kafka/issues 
 
-Please ask questions or discuss ideas in the [Lightbend discuss forum](https://discuss.lightbend.com/c/akka/).
+Please ask questions or discuss ideas in the [discuss.akka.io forum](https://discuss.akka.io/).
 
 ## Please add the following sections to your bug report
 -->

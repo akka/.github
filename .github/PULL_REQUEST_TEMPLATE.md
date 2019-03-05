@@ -12,7 +12,7 @@
 
 ## Fixes
 
-<!-- reference relevant issues, please -->
+<!-- if this PR relates to any GitHub issues, please list them here -->
 Fixes #xxxx
 
 ## Background Context
