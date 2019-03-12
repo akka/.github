@@ -1,4 +1,4 @@
-# Welcome! Thank you for contributing to Akka!
+# Welcome! Thank you for contributing to the Akka family of projects!
 
 We follow the standard GitHub [fork & pull](https://help.github.com/articles/using-pull-requests/#fork--pull) approach to pull requests. Just fork the official repo, develop in a branch, and submit a PR!
 
@@ -16,8 +16,9 @@ You may also check out these [other resources](https://akka.io/get-involved/).
 
 Depending on which version (or sometimes module) you want to work on, you should target a specific branch as explained below:
 
-* `master` – active development branch for the current major version (eg. Akka 2.5.x)
-* `release-2.4` – maintenance branch of prior versions (eg. Akka 2.4.x)
+* `master` – active development branch of Akka 2.5.x
+* `release-2.4` – maintenance branch of Akka 2.4.x
+* similarly `release-2.#` branches contain legacy versions of Akka
 
 ## Tags
 
@@ -146,6 +147,13 @@ project akka-cluster
 multi-jvm:testOnly akka.cluster.SunnyWeather
 ```
 
+To format the Scala source code:
+```
+sbt
+akka-cluster/scalafmtAll
+akka-persistence/scalafmtAll
+```
+
 ### Do not use `-optimize` Scala compiler flag
 
 Akka has not been compiled or tested with `-optimize` Scala compiler flag. (In sbt, you can specify compiler options in the `scalacOptions` key.)
@@ -182,6 +190,11 @@ target PR branch you can do so by setting the PR_TARGET_BRANCH environment varia
 ```
 PR_TARGET_BRANCH=origin/example sbt validatePullRequest
 ```
+
+If you have already run all tests and now just need to check that everything is formatted and or mima passes there
+are a set of `all*` commands aliases for running `test:compile` (also formats), `mimaReportBinaryIssues`, and `validateCompile` 
+(compiles `multi-jvm` if enabled for that project). See `build.sbt` or use completion to find the most appropriate one 
+e.g. `allCluster`, `allTyped`.
 
 ## Binary compatibility
 
@@ -354,7 +367,10 @@ In such situations we prefer 'internal' over 'impl' as a package name.
 
 ### Scala style 
 
-Akka uses [Scalariform](https://github.com/daniel-trinh/scalariform) to enforce some of the code style rules.
+Most Akka projects use [Scalafmt](https://scalameta.org/scalafmt/docs/installation.html) to enforce some of the code style rules.
+
+When IntelliJ detects the `.scalafmt.conf` and promts "Scalafmt configuration detected in this project" you should
+select "Continue using IntelliJ formatter" and instead install the [Scalafmt IntelliJ plugin](https://scalameta.org/scalafmt/docs/installation.html#intellij). Install the nightly plugin (until version 2.0.0 or later becomes stable) and enable "Format on save".
 
 ### Java style
 

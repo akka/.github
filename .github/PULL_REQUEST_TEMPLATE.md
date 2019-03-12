@@ -10,15 +10,18 @@
 
 <!-- What does this PR do? -->
 
-## Fixes
+## References
 
-<!-- if this PR relates to any GitHub issues, please list them here -->
-Fixes #xxxx
+<!--
+  Are there any relevant issues / PRs / mailing lists discussions?
+  Please DON`T use `Fixes` notation.
+-->
+References #xxxx
+
+## Changes
+
+<!-- Bullets for important changes in this PR -->
 
 ## Background Context
 
 <!-- Why did you take this approach? -->
-
-## References
-
-<!-- Are there any relevant issues / PRs / mailing lists discussions? -->
