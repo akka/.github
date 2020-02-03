@@ -4,23 +4,23 @@ We follow the standard GitHub [fork & pull](https://help.github.com/articles/usi
 
 You're always welcome to submit your PR straight away and start the discussion (without reading the rest of this wonderful doc, or the README.md). The goal of these notes is to make your experience contributing to Akka as smooth and pleasant as possible. We're happy to guide you through the process once you've submitted your PR.
 
-# The Akka Community
+## The Akka Community
 
 In case of questions about the contribution process or for discussion of specific issues please visit the [akka/dev gitter chat](https://gitter.im/akka/dev).
 
 You may also check out these [other resources](https://akka.io/get-involved/).
 
-# Navigating around the project & codebase
+## Navigating around the project & codebase
 
-## Branches summary
+### Branches summary
 
 Depending on which version (or sometimes module) you want to work on, you should target a specific branch as explained below:
 
-* `master` – active development branch of Akka 2.5.x
-* `release-2.4` – maintenance branch of Akka 2.4.x
+* `master` – active development branch of Akka 2.6.x
+* `release-2.5` – maintenance branch of Akka 2.5.x
 * similarly `release-2.#` branches contain legacy versions of Akka
 
-## Tags
+### Tags
 
 Akka uses tags to categorise issues into groups or mark their phase in development.
 
@@ -53,7 +53,7 @@ Pull request validation states:
 
 - `validating => [tested | needs-attention]` - signify pull request validation status.
 
-# Akka contributing guidelines
+## Akka contributing guidelines
 
 These guidelines apply to all Akka projects, by which we mean both the `akka/akka` repository,
 as well as any plugins or additional repositories located under the Akka GitHub organisation.
@@ -61,9 +61,9 @@ as well as any plugins or additional repositories located under the Akka GitHub 
 These guidelines are meant to be a living document that should be changed and adapted as needed.
 We encourage changes that make it easier to achieve our goals in an efficient way.
 
-## General workflow
+### General workflow
 
-The steps below describe how to get a patch into a main development branch (e.g. `master`). 
+The steps below describe how to get a patch into a main development branch (e.g. `master`).
 The steps are exactly the same for everyone involved in the project (be it core team, or first time contributor).
 
 1. To avoid duplicated effort, it might be good to check the [issue tracker](https://github.com/akka/akka/issues) and [existing pull requests](https://github.com/akka/akka/pulls) for existing work.
@@ -83,22 +83,39 @@ The steps are exactly the same for everyone involved in the project (be it core 
 1. After the review you should fix the issues as needed (pushing a new commit for new review etc.), iterating until the reviewers give their thumbs up–which is signalled usually by a comment saying `LGTM`, which means "Looks Good To Me". 
     - In general a PR is expected to get 2 LGTMs from the team before it is merged. If the PR is trivial, or under special circumstances (such as most of the team being on vacation, a PR was very thoroughly reviewed/tested and surely is correct) one LGTM may be fine as well.
 1. If the code change needs to be applied to other branches as well (for example a bugfix needing to be backported to a previous version), one of the team will either ask you to submit a PR with the same commit to the old branch, or do this for you.
-   - Backport pull requests such as these are marked using the phrase `for validation` in the title to make the purpose clear in the pull request list. They can be merged once validation passes without additional review (if there are no conflicts).
+   - Follow the [backporting steps](#backporting) below.
 1. Once everything is said and done, your pull request gets merged :tada: Your feature will be available with the next “earliest” release milestone (i.e. if back-ported so that it will be in release x.y.z, find the relevant milestone for that release). And of course you will be given credit for the fix in the release stats during the release's announcement. You've made it!
 
 The TL;DR; of the above very precise workflow version is:
 
 1. Fork Akka
 2. Hack and test on your feature (on a branch)
-3. Document it 
+3. Document it
 4. Submit a PR
 5. Sign the CLA if necessary
 6. Keep polishing it until received enough LGTM
 7. Profit!
 
-## sbt
+### Backporting
 
-Akka is using the [sbt](https://github.com/sbt/sbt) build system. So the first thing you have to do is to download and install sbt. You can read more about how to do that in the [sbt setup](http://www.scala-sbt.org/0.13/tutorial/index.html) documentation.
+Backport pull requests such as these are marked using the phrase `for validation` in the title to make the purpose clear in the pull request list.
+They can be merged once validation passes without additional review (if there are no conflicts).
+Using, for example: current.version 2.5.22, previous.version 2.5, milestone.version 2.6.0-M1
+1. Label this PR with `to-be-backported`
+1. Mark this PR with Milestone `${milestone.version}`
+1. Mark the issue with Milestone `${current.version}`
+1. `git checkout release-${previous.version}`
+1. `git pull`
+1. Create wip branch
+1. `git cherry-pick <commit>`
+1. Open PR, target `release-${previous.version}`
+1. Label that PR with `backport`
+1. Merge backport PR after validation (no need for full PR reviews)
+1. Close issue
+
+## Getting started with sbt
+
+Akka is using the [sbt](https://github.com/sbt/sbt) build system. So the first thing you have to do is to download and install sbt. You can read more about how to do that in the [sbt setup](https://www.scala-sbt.org/1.x/docs/Getting-Started.html) documentation.
 
 Note that the Akka sbt project is large, so `sbt` needs to be run with lots of heap (1-2 GB). This can be specified using a command line argument `sbt -mem 2048` or in the environment variable `SBT_OPTS` but then as a regular JVM memory flag, for example `SBT_OPTS=-Xmx2G`, on some platforms you can also edit the global defaults for sbt in `/usr/local/etc/sbtopts`.
 
@@ -148,6 +165,7 @@ multi-jvm:testOnly akka.cluster.SunnyWeather
 ```
 
 To format the Scala source code:
+
 ```
 sbt
 akka-cluster/scalafmtAll
@@ -192,8 +210,8 @@ PR_TARGET_BRANCH=origin/example sbt validatePullRequest
 ```
 
 If you have already run all tests and now just need to check that everything is formatted and or mima passes there
-are a set of `all*` commands aliases for running `test:compile` (also formats), `mimaReportBinaryIssues`, and `validateCompile` 
-(compiles `multi-jvm` if enabled for that project). See `build.sbt` or use completion to find the most appropriate one 
+are a set of `all*` commands aliases for running `test:compile` (also formats), `mimaReportBinaryIssues`, and `validateCompile`
+(compiles `multi-jvm` if enabled for that project). See `build.sbt` or use completion to find the most appropriate one
 e.g. `allCluster`, `allTyped`.
 
 ## Binary compatibility
@@ -201,17 +219,21 @@ e.g. `allCluster`, `allTyped`.
 Binary compatibility rules and guarantees are described in depth in the [Binary Compatibility Rules
 ](http://doc.akka.io/docs/akka/snapshot/common/binary-compatibility-rules.html) section of the documentation.
 
-Akka uses MiMa (which is short for [Lightbend Migration Manager](https://github.com/typesafehub/migration-manager)) to
-validate binary compatibility of incoming pull requests. If your PR fails due to binary compatibility issues, you may see 
+Akka uses [MiMa](https://github.com/lightbend/mima) to
+validate binary compatibility of incoming pull requests. If your PR fails due to binary compatibility issues, you may see
 an error like this:
 
 ```
-[info] akka-stream: found 1 potential binary incompatibilities while checking against com.typesafe.akka:akka-stream_2.11:2.4.2  (filtered 222)
+[info] akka-stream: found 1 potential binary incompatibilities while checking against com.typesafe.akka:akka-stream_2.12:2.4.2  (filtered 222)
 [error]  * method foldAsync(java.lang.Object,scala.Function2)akka.stream.scaladsl.FlowOps in trait akka.stream.scaladsl.FlowOps is present only in current version
 [error]    filter with: ProblemFilters.exclude[ReversedMissingMethodProblem]("akka.stream.scaladsl.FlowOps.foldAsync")
 ```
 
-In such situations it's good to consult with a core team member if the violation can be safely ignored (by adding the above snippet to `<module>/src/main/mima-filters/<last-version>.backwards.excludes`), or if it would indeed break binary compatibility.
+In such situations it's good to consult with a core team member whether the violation can be safely ignored or if it would indeed
+break binary compatibility. If the violation can be ignored add exclude statements from the mima output to
+a new file named `<module>/src/main/mima-filters/<last-version>.backwards.excludes/<pr-or-issue>-<issue-number>-<description>.excludes`,
+e.g. `akka-actor/src/main/mima-filters/2.6.0.backwards.excludes/pr-12345-rename-internal-classes.excludes`. Make sure to add a comment
+in the file that describes briefly why the incompatibility can be ignored.
 
 Situations when it may be fine to ignore a MiMa issued warning include:
 
@@ -267,7 +289,7 @@ The generated html documentation is in `akka-docs/target/paradox/site/main/index
 
 ### Scaladoc
 
-Akka generates class diagrams for the API documentation using ScalaDoc. 
+Akka generates class diagrams for the API documentation using ScalaDoc.
 
 Links to methods in ScalaDoc comments should be formatted
 `[[Like#this]]`, because `[[this]]` does not work with genjavadoc, and
@@ -365,12 +387,14 @@ Note, that `OK TO TEST` will only be picked up when the user asking for it is co
 Sometimes it is convenient to place 'internal' classes in their own package.
 In such situations we prefer 'internal' over 'impl' as a package name.
 
-### Scala style 
+### Scala style
 
 Most Akka projects use [Scalafmt](https://scalameta.org/scalafmt/docs/installation.html) to enforce some of the code style rules.
 
-When IntelliJ detects the `.scalafmt.conf` and promts "Scalafmt configuration detected in this project" you should
-select "Continue using IntelliJ formatter" and instead install the [Scalafmt IntelliJ plugin](https://scalameta.org/scalafmt/docs/installation.html#intellij). Install the nightly plugin (until version 2.0.0 or later becomes stable) and enable "Format on save".
+It's recommended to enable Scalafmt formatting in IntelliJ. Use version 2019.1 or later. In
+Preferences > Editor > Code Style > Scala, select Scalafmt as formatter and enable "Reformat on file save".
+IntelliJ will then use the same settings and version as defined in `.scalafmt.conf` file. Then it's
+not needed to use `sbt scalafmtAll` when editing with IntelliJ.
 
 ### Java style
 
@@ -385,14 +409,14 @@ Thus we ask Java contributions to follow these simple guidelines:
 
 Avoid short test timeouts, since Jenkins server may GC heavily causing spurious test failures. GC pause or other hiccups of 2 seconds are common in our CI environment. Please note that usually giving a larger timeout *does not slow down the tests*, as in an `expectMessage` call for example it usually will complete quickly.
 
-There are a number of ways timeouts can be defined in Akka tests. The following ways to use timeouts are recommended (in order of preference): 
+There are a number of ways timeouts can be defined in Akka tests. The following ways to use timeouts are recommended (in order of preference):
 
 * `remaining` is first choice (requires `within` block)
 * `remainingOrDefault` is second choice
 * `3.seconds` is third choice if not using testkit
 * lower timeouts must come with a very good reason (e.g. Awaiting on a known to be "already completed" `Future`)
 
-Special care should be given to `expectNoMsg` calls, which indeed will wait the entire timeout before continuing, therefore a shorter timeout should be used in those, for example `200` or `300.millis`.
+Special care should be given to `expectNoMessage` calls, which indeed will wait the entire timeout before continuing, therefore a shorter timeout should be used in those, for example `200` or `300.millis`. Prefer the method without timeout parameter, which will use the configured `expect-no-message-default` timeout.
 
 You can read up on `remaining` and friends in [TestKit.scala](https://github.com/akka/akka/blob/master/akka-testkit/src/main/scala/akka/testkit/TestKit.scala).
 
@@ -401,7 +425,7 @@ You can read up on `remaining` and friends in [TestKit.scala](https://github.com
 For external contributions of entire features, the normal way is to establish it
 as a stand-alone feature first, to show that there is a need for the feature. The
 next step would be to add it to Akka as an "may change"-feature (in the
-akka-contrib subproject) and marking it's public api with the `ApiMayChange` annotation, 
+akka-contrib subproject) and marking it's public api with the `ApiMayChange` annotation,
 then when the feature is hardened, well documented and
 tested it becomes an officially supported Akka feature.
 
@@ -409,13 +433,13 @@ tested it becomes an officially supported Akka feature.
 
 ## Java APIs in Akka
 
-Akka, aims to keep 100% feature parity between the Java and Scala. Implementing even the API for Java in 
+Akka, aims to keep 100% feature parity between the Java and Scala. Implementing even the API for Java in
 Scala has proven the most viable way to do it, as long as you keep the following in mind:
 
-1. Keep entry points separated in `javadsl` and `scaladsl` unless changing existing APIs which for historical 
+1. Keep entry points separated in `javadsl` and `scaladsl` unless changing existing APIs which for historical
    and binary compatibility reasons do not have this subdivision.
-   
-1. Have methods in the `javadsl` package delegate to the methods in the Scala API, or the common internal implementation. 
+
+1. Have methods in the `javadsl` package delegate to the methods in the Scala API, or the common internal implementation.
    The Akka Stream Scala instances for example have a `.asJava` method to convert to the `akka.stream.javadsl` counterparts.
    
 1. When using Scala `object` instances, offer a `getInstance()` method and add a sealed abstract class 
@@ -423,8 +447,8 @@ Scala has proven the most viable way to do it, as long as you keep the following
    
 1. When the Scala API contains an `apply` method, use `create` or `of` for Java users.
 
-1. Do not nest Scala `object`s more than two levels. 
-   
+1. Do not nest Scala `object`s more than two levels.
+
 1. Do not define traits nested in other classes or in objects deeper than one level.
 
 1. Be careful to convert values within data structures (eg. for `scala.Long` vs. `java.lang.Long`, use `scala.Long.box(value)`)
@@ -436,12 +460,12 @@ Scala has proven the most viable way to do it, as long as you keep the following
 
 1. Use the `akka.japi.Pair` class to return tuples
 
-1. If the underlying Scala code requires an `ExecutionContext`, make the Java API take an `Executor` and use 
+1. If the underlying Scala code requires an `ExecutionContext`, make the Java API take an `Executor` and use
    `ExecutionContext.fromExecutor(executor)` for conversion.
 
-1. Make use of `scala-java8-compat` conversions, see [GitHub](https://github.com/scala/scala-java8-compat) 
+1. Make use of `scala-java8-compat` conversions, see [GitHub](https://github.com/scala/scala-java8-compat)
    (eg. `scala.compat.java8.FutureConverters` to translate Futures to `CompletionStage`s).
-   Note that we cannot upgrade to a newer version scala-java8-compat because of binary compatibility issues. 
+   Note that we cannot upgrade to a newer version scala-java8-compat because of binary compatibility issues.
 
 1. Make sure there are Java tests or sample code touching all parts of the API
 
@@ -449,7 +473,7 @@ Scala has proven the most viable way to do it, as long as you keep the following
 
 1. Provide `getX` style accessors for values in the Java APIs
 
-1. Place classes not part of the public APIs in a shared `internal` package. This package can contain implementations of 
+1. Place classes not part of the public APIs in a shared `internal` package. This package can contain implementations of
    both Java and Scala APIs. Make such classes `private[akka]` and also, since that becomes `public` from Java's point of
    view, annotate with `@InternalApi` and add a scaladoc saying `INTERNAL API`
    
@@ -457,9 +481,8 @@ Scala has proven the most viable way to do it, as long as you keep the following
    
 1. Traits that are part of the Java API should only be used to define pure interfaces, as soon as there are implementations of methods, prefer 
    `abstract class`.
-      
+
 1. Any method definition in a class that will be part of the Java API should not use any default parameters, as they will show up ugly when using them from Java, use plain old method overloading instead.
-   
 
 ### Overview of Scala types and their Java counterparts
 
@@ -473,8 +496,6 @@ Scala has proven the most viable way to do it, as long as you keep the following
 | `T => Unit` | `java.util.function.Consumer<T>` |
 | `() => R` (`scala.Function0[R]`) | `java.util.function.Supplier<R>` |
 | `T => R` (`scala.Function1[T, R]`) | `java.util.function.Function<T, R>` |
-
-
 
 ## Contributing new Akka Streams operators
 
@@ -498,13 +519,20 @@ the index or category pages manually.
 
 ### Adding new top-level objects/classes containing operators
 
-In case you are adding not only a new operator, but also a new class/object, you need to add it to the 
-`project/StreamOperatorsIndexGenerator.scala` so it can be included in the automatic docs generation and enforcing the 
+In case you are adding not only a new operator, but also a new class/object, you need to add it to the
+`project/StreamOperatorsIndexGenerator.scala` so it can be included in the automatic docs generation and enforcing the
 existence of those docs.
 
-# Supporting infrastructure
+## Supporting infrastructure
 
-## Continuous integration
+### Reporting security issues
+
+If you have found an issue in an Akka project that might have security
+implications, you can report it to <security@lightbend.com>. We will make
+sure those will get handled with priority. Thank you for your responsible
+disclosure!
+
+### Continuous integration
 
 Akka currently uses a combination of Jenkins and Travis for Continuous Integration:
 
@@ -520,4 +548,4 @@ The cluster is made out of real bare-metal boxes, and maintained by the Akka tea
 
 * [Akka Contributor License Agreement](http://www.lightbend.com/contribute/cla)
 * [Akka Issue Tracker](http://doc.akka.io/docs/akka/current/project/issue-tracking.html)
-* [Scalariform](https://github.com/daniel-trinh/scalariform)
+* [Scalafmt](https://scalameta.org/scalafmt/)
