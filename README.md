@@ -2,21 +2,29 @@
 
 Welcome to the Akka family of projects!
 
-[Akka](https://akka.io/)
+To get started, see the [Akka Guide](https://developer.lightbend.com/docs/akka-guide/).
 
-[Akka Http](https://doc.akka.io/docs/akka-http/current/)
+### Module specific documentation links
+
+[Akka (core)](https://doc.akka.io/docs/akka/current/)
+
+[Akka HTTP](https://doc.akka.io/docs/akka-http/current/)
+
+[Akka gRPC](https://doc.akka.io/docs/akka-grpc/current/)
 
 [Alpakka Kafka](https://doc.akka.io/docs/alpakka-kafka/current/)
 
 [Alpakka](https://doc.akka.io/docs/alpakka/current/)
 
-[Akka Persistence Cassandra](https://github.com/akka/akka-persistence-cassandra)
+[Akka Persistence Cassandra](https://doc.akka.io/docs/akka-persistence-cassandra/current/)
 
-[Akka Persistence Couchbase](https://doc.akka.io/docs/akka-persistence-couchbase/current/)
+[Akka Persistence JDBC](https://doc.akka.io/docs/akka-persistence-jdbc/current/)
 
-[Akka Management](https://developer.lightbend.com/docs/akka-management/current/)
+[Akka Persistence R2DBC](https://doc.akka.io/docs/akka-persistence-r2dbc/current/)
 
-[Akka gRPC](https://developer.lightbend.com/docs/akka-grpc/current/)
+[Akka Projections](https://doc.akka.io/docs/akka-projection/current/)
+
+[Akka Management](https://doc.akka.io/docs/akka-management/current/)
 
 Before contributing, please read the [contributing guidelines](CONTRIBUTING.md) and notice our [Code of Conduct](CODE_OF_CONDUCT.md).
 
