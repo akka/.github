@@ -14,7 +14,7 @@ Building on the principles of The Reactive Manifesto Akka allows you to write sy
 
 ### High Performance
 
-Up to 50 million msg/sec on a single machine. Small memory footprint; ~2.5 million actors per GB of heap.
+Up to 200 million msg/sec on a single machine. Small memory footprint; ~2.5 million actors per GB of heap.
 
 ### Elastic & Decentralized
 
