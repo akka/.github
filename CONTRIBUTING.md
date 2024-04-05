@@ -16,9 +16,8 @@ You may also check out these [other resources](https://akka.io/get-involved/).
 
 Depending on which version (or sometimes module) you want to work on, you should target a specific branch as explained below:
 
-* `master` – active development branch of Akka 2.6.x
-* `release-2.5` – maintenance branch of Akka 2.5.x
-* similarly `release-2.#` branches contain legacy versions of Akka
+* `main` – active development branch
+* `release-x.y` – maintenance branch of releases versions
 
 ### Tags
 
@@ -344,7 +343,7 @@ Follow these guidelines when creating public commits and writing commit messages
 
 Example:
 
-    enable Travis CI #1
+    enable CI #1
 
     * Details 1
     * Details 2
@@ -534,15 +533,7 @@ disclosure!
 
 ### Continuous integration
 
-Akka currently uses a combination of Jenkins and Travis for Continuous Integration:
-
-* Jenkins [runs the tests for each PR](https://jenkins.akka.io:8498/job/pr-validator-per-commit-jenkins/)
-* Jenkins [runs a nightly test suite](https://jenkins.akka.io:8498/view/Nightly%20Jobs/job/akka-nightly/)
-* Travis [checks dependency licenses for all PR's](https://travis-ci.org/akka/akka)
-
-The [Jenkins server farm](https://jenkins.akka.io/), sometimes referred to as "the Lausanne cluster", is sponsored by Lightbend.
-
-The cluster is made out of real bare-metal boxes, and maintained by the Akka team (and other very helpful people at Lightbend).
+Akka projects use GitHub workflows for Continuous Integration.
 
 ## Related links
 

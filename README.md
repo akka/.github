@@ -2,7 +2,7 @@
 
 Welcome to the Akka family of projects!
 
-To get started, see the [Akka Guide](https://developer.lightbend.com/docs/akka-guide/).
+To get started, see the [Akka Documentation](https://akka.io/docs/).
 
 ### Module specific documentation links
 
