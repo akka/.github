@@ -1,27 +1,47 @@
-# Akka -- Build powerful reactive, concurrent, and distributed applications more easily
+Akka
+====
 
-Akka is a toolkit for building highly concurrent, distributed, and resilient message-driven applications for Java and Scala.
+*Akka is a powerful platform that simplifies building and operating highly responsive, resilient, and scalable services.*
 
-*Akka is the implementation of the Actor Model on the JVM.*
+The platform consists of
+* the [**Akka SDK**](https://doc.akka.io/sdk/index.html) for straightforward, rapid development with AI assist and automatic clustering. Services built with the Akka SDK are automatically clustered and can be deployed on any infrastructure.
+* and [**Akka Automated Operations**](https://doc.akka.io/operations/akka-platform.html), a managed solution that handles everything for Akka SDK services from auto-elasticity to multi-region high availability running safely within your VPC.
 
-### Simpler Concurrent & Distributed Systems
+The **Akka SDK** and **Akka Automated Operations** are built upon the foundational [**Akka libraries**](https://doc.akka.io/libraries/akka-dependencies/current/), providing the building blocks for distributed systems.
 
-Actors and Streams let you build systems that scale up, using the resources of a server more efficiently, and out, using multiple servers.
+Akka has been downloaded more than 1 billion times and has powered thousands of systems for over 15 years.  Akka enables millions of concurrent users, terabyte stream processing, low-latency read/write data access, 99.9999% availability, and multi-region high availability and disaster recovery (HA/DR).
 
-### Resilient by Design
+Akka is used to build agentic AI, AI inference, transactional, analytical, digital twin, IOT, and edge-to-cloud systems. It is simple to learn and operate. Akka creates production-ready systems without requiring prior knowledge of events, threading, or distributed systems.
 
-Building on the principles of The Reactive Manifesto Akka allows you to write systems that self-heal and stay responsive in the face of failures.
+## Akka libraries
 
-### High Performance
+To get started, see the [Akka libraries documentation](https://doc.akka.io/libraries/index.html).
 
-Up to 200 million msg/sec on a single machine. Small memory footprint; ~2.5 million actors per GB of heap.
+[Akka (core)](https://doc.akka.io/libraries/akka-core/current/)
 
-### Elastic & Decentralized
+[Akka HTTP](https://doc.akka.io/libraries/akka-http/current/)
 
-Distributed systems without single points of failure. Load balancing and adaptive routing across nodes. Event Sourcing and CQRS with Cluster Sharding. Distributed Data for eventual consistency using CRDTs.
+[Akka gRPC](https://doc.akka.io/libraries/akka-grpc/current/)
 
-### Reactive Streaming Data
+[Alpakka Kafka](https://doc.akka.io/libraries/alpakka-kafka/current/)
 
-Asynchronous non-blocking stream processing with backpressure. Fully async and streaming HTTP server and client provides a great platform for building microservices. Streaming integrations with Alpakka.
+[Alpakka](https://doc.akka.io/libraries/alpakka/current/)
 
-Find the full documentation at https://akka.io
+[Akka Persistence Cassandra](https://doc.akka.io/libraries/akka-persistence-cassandra/current/)
+
+[Akka Persistence JDBC](https://doc.akka.io/libraries/akka-persistence-jdbc/current/)
+
+[Akka Persistence R2DBC](https://doc.akka.io/libraries/akka-persistence-r2dbc/current/)
+
+[Akka Projections](https://doc.akka.io/libraries/akka-projection/current/)
+
+[Akka Management](https://doc.akka.io/libraries/akka-management/current/)
+
+[Akka Diagnostics](https://doc.akka.io/libraries/akka-diagnostics/current/)
+
+[Akka Insights](https://doc.akka.io/libraries/akka-insights/current/)
+
+Before contributing, please read the [contributing guidelines](CONTRIBUTING.md) and notice our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+If you need help, please check [support references](SUPPORT.md).
+
